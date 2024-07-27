@@ -206,6 +206,7 @@ handle.Parent = tool
  
 -- Create the animation
 local animationId = "rbxassetid://13560306510"  -- Replace with your animation ID
+local animationId2 = "rbxassetid://13560306510"  -- Replace with your animation ID
  
 -- Function to equip the tool and trigger animation
 local function onEquipped()
@@ -259,6 +260,7 @@ local function spinMesh()
         task.wait(0.01)
     end
 end
+
  
 -- Start spinning the mesh in a separate thread
 task.spawn(spinMesh)
@@ -269,10 +271,16 @@ part:Destroy()
         animationTrack:Stop()
         -- unAnchor the humanoid root part
         rootPart.Anchored = false
+        local animation2 = Instance.new("Animation")
+        animation2.AnimationId = animationId2
+        local animationTrack2 = humanoid:LoadAnimation(animation2)
+        animationTrack2:Play()
  
         -- Stop animation and unanchor humanoid root part when unequipped
         tool.Unequipped:Connect(function()
         print("you unheld a tool WOW! LOL")
+        wait(0.57)
+        animationTrack2:Stop()
         end)
     end
 end
